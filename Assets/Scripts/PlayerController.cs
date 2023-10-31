@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private float movementY;
 
-    private int jump;
+    public int jump;
 
     // Start is called before the first frame update
     void Start()
@@ -59,9 +59,12 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey("space"))
+        if (Input.GetKeyDown("space"))
         {
-            jump = 50;
+            if (transform.position.y <= 0.5)
+            {
+                jump = 300;
+            }
         }
         else
         {
