@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     private float movementY;
 
+    private int jump;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,7 +40,6 @@ public class PlayerController : MonoBehaviour
         movementX = movementVector.x;
 
         movementY = movementVector.y;
-        
     }
 
     void SetCountText()
@@ -51,11 +52,30 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    void Jump()
+    {
+        rb.AddForce(0, jump, 0);
+    }
+
+    void Update()
+    {
+        if (Input.GetKey("space"))
+        {
+            jump = 50;
+        }
+        else
+        {
+            jump = 0;
+        }
+    }
+
     void FixedUpdate()
     {
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
 
         rb.AddForce(movement * speed);
+
+        Jump();
     }
 
     private void OnTriggerEnter(Collider other)
